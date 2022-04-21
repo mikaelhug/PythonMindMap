@@ -48,7 +48,10 @@ def parse_classes(file):
                 elif hasattr(init_var.value, 'id'):
                     var_value = init_var.value.id
                 else:
-                    print("unknown values")
+                    if isinstance(init_var.value, ast.Dict):
+                        var_value = {}
+                    elif isinstance(init_var.value, ast.List):
+                        var_value = []
 
             elif isinstance(init_var, ast.AnnAssign):
                 if hasattr(init_var.target, 'attr'):
